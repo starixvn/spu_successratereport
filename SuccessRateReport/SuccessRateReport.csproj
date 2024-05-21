@@ -15,12 +15,6 @@
       <None Update="RequestBody.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="RequestBody_Credit.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="RequestBody_Licensee.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>

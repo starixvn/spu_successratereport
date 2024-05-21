@@ -1,64 +1,47 @@
 {
-    "from": 0,
-    "size": 0,
-    "query": {
-        "bool": {
-            "must": [
-                {
-                    "range": {
-                        "@timestamp": {
-                            "gte": "{0}",
-                            "lte": "{1}"
-                        }
-                    }
-                },
-                {
-                    "match": {
-                        "ParlayStatistics.Topic": "MixParlay"
-                    }
-                },
-                {
-                    "bool": {
-                        "should": [
-                            {
-                                "match": {
-                                    "ParlayStatistics.SportType": 1
-                                }
-                            },
-                            {
-                                "match": {
-                                    "ParlayStatistics.SportType": 99
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "term": {
-                        "ParlayStatistics.SubTickets.IsLive": true
-                    }
-                },
-                {
-                    "range": {
-                        "ParlayStatistics.BettingErrorCode": {
-                            "gt": 0
-                        }
-                    }
-                },
-                {
-                    "terms": {
-                        "ParlayStatistics.SubTickets.CustomerClass": [ 1, 2, 100, 111, 112, 113, 201, 202, 901, 999, 1001, 2001, 2101, 2201 ]
-                    }
-                }
-            ]
-        }
-    },
-    "aggs": {
-        "group_by_error_message": {
-            "terms": {
-                "field": "ParlayStatistics.BettingErrorMessage",
-                "size": 100
+  "from": 0,
+  "size": 0,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-15m",
+              "lte": "now"
             }
+          }
+        },
+        {
+          "match": {
+            "ParlayStatistics.Topic": "MixParlay"
+          }
+        },
+        {
+          "bool": {
+            "should": [
+              {
+                "match": {
+                  "ParlayStatistics.SportType": 1
+                }
+              },
+              {
+                "match": {
+                  "ParlayStatistics.SportType": 99
+                }
+              }
+            ]
+          }
         }
+      ]
     }
+  },
+  "aggs": {
+    "group_by_error_message": {
+      "terms": {
+        "field": "ParlayStatistics.BettingErrorMessage",
+        "size": 100
+      }
+    }
+  }
 }
